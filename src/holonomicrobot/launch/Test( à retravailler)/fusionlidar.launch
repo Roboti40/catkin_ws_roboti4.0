@@ -1,0 +1,33 @@
+<launch>
+  <arg name="scan_topic" default="/scan" />
+  <arg name="lidar1_topic" default="/lidar1" />
+  <arg name="lidar2_topic" default="/lidar2" />
+  
+  <!-- Nœud pour publier les données du Lidar 1 -->
+  <node pkg="rplidar_ros" type="lidar_publisher.py" name="lidar1_publisher" output="screen">
+    <param name="lidar_topic" value="/lidar1"/>
+  </node>
+
+  <!-- Nœud pour publier les données du Lidar 2 -->
+  <node pkg="rplidar_ros" type="lidar_publisher.py" name="lidar2_publisher" output="screen">
+    <param name="lidar_topic" value="/lidar2"/>
+  </node>
+
+  <!-- Nœud pour fusionner les données des Lidars -->
+  <node pkg="nodelet" type="nodelet" name="lidar_merger" output="screen" args="load rplidar_ros/lidar_merger_nodelet lidar_merger">
+    <param name="lidar1_topic" value="$(arg lidar1_topic)"/>
+    <param name="lidar2_topic" value="$(arg lidar2_topic)"/>
+    <remap from="merged" to="$(arg scan_topic)"/>
+  </node>
+  
+  
+    <!-- Nœud pour fusionner les données des Lidars -->
+  <node pkg="rplidar_ros" type="test.py" name="lidar_merger" output="screen">
+    <param name="lidar1_topic" value="/lidar1"/>
+    <param name="lidar2_topic" value="/lidar2"/>
+    <remap from="merged" to="$(arg scan_topic)"/>
+  </node>
+  
+  
+</launch>
+

@@ -1,0 +1,37 @@
+<launch>
+
+  <param name="robot_description" textfile="$(find holonomicrobot)/urdf/holonomicrobot.urdf"/>
+
+  <node name="odom" pkg="odometry" type="odometry.py" output="screen"/>
+  
+  <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+  <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>   
+  <param name="serial_baudrate"     type="int"    value="256000"/><!--A3 -->
+  <param name="frame_id"            type="string" value="Lidar_front"/>
+  <param name="inverted"            type="bool"   value="false"/>
+  <param name="angle_compensate"    type="bool"   value="false"/>
+  <param name="scan_mode"           type="string" value="Sensitivity"/>
+  </node>
+  <?ignore
+  <node name="rplidarbisNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+  <param name="serial_port"         type="string" value="/dev/ttyUSB1"/>   
+  <param name="serial_baudrate"     type="int"    value="256000"/><!--A3 -->
+  <param name="frame_id"            type="string" value="Lidar_rear"/>
+  <param name="inverted"            type="bool"   value="false"/>
+  <param name="angle_compensate"    type="bool"   value="false"/>
+  <param name="scan_mode"           type="string" value="Sensitivity"/>
+  </node>
+  ?>
+  
+  <arg name="rvizconfig" default="$(find rplidar_ros)/rviz/robot_and_lidar_linked.rviz"/>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  
+  <?ignore
+  <node name="state_publisher" pkg="state_publisher" type="state_publisher"/>
+  ?>
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+  
+
+</launch>

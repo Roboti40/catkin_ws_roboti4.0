@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<robot name="holonomicrobot">
+
+
+<material name="aluminium profile">
+  <color rgba="0.7 0 0 1"/>
+</material>
+    
+<material name="yellow"> 
+  <color rgba="1 1 0 1"/> 
+</material> 
+
+<material name="purple"> 
+  <color rgba="1 0 0.8 1"/> 
+</material> 
+
+<material name="blue"> 
+  <color rgba="0.2 1 1 1"/> 
+</material> 
+
+
+<link name="base_link">
+   <visual>
+    <geometry>
+     <box size="0.9 0.48 0.35"/>
+    </geometry>
+    <material name="aluminium profile"/>
+   </visual>
+   <collision>
+     <geometry>
+       <box size="0.48 0.9 0.35"/>
+     </geometry>
+   </collision>
+ </link>
+ 
+ <link name="right_rear_wheel"> 
+    <visual> 
+      <geometry> 
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry> 
+      <material name="yellow"/> 
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="right_rear_wheel_joint" type="fixed"> 
+    <axis xyz="0 0 1"/> 
+    <parent link="base_link"/> 
+    <child link="right_rear_wheel"/> 
+    <origin rpy="1.5708 0 0" xyz="0.36143 0.281 -0.17159"/> 
+  </joint>
+  
+  
+  
+  
+ <link name="left_rear_wheel"> 
+    <visual> 
+      <geometry> 
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry> 
+      <material name="yellow"/>
+    </visual> 
+    <collision>
+      <geometry>
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry>
+    </collision>
+  </link>
+  
+  
+
+  <joint name="left_rear_wheel_joint" type="fixed"> 
+    <axis xyz="0 0 1"/> 
+    <parent link="base_link"/> 
+    <child link="left_rear_wheel"/> 
+    <origin rpy="1.5708 0 0" xyz="0.36143 -0.281 -0.17159"/> 
+  </joint>
+  
+ 
+ <link name="right_front_wheel"> 
+    <visual> 
+      <geometry> 
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry> 
+      <material name="yellow"/>
+    </visual> 
+    <collision>
+      <geometry>
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="right_front_wheel_joint" type="fixed"> 
+    <axis xyz="0 0 1"/> 
+    <parent link="base_link"/> 
+    <child link="right_front_wheel"/> 
+    <origin rpy="1.5708 0 0" xyz="-0.36143 0.281 -0.17159"/> 
+  </joint>
+  
+  
+  
+  
+ <link name="left_front_wheel"> 
+    <visual> 
+      <geometry> 
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry> 
+      <material name="yellow"/>
+    </visual> 
+    <collision>
+      <geometry>
+        <cylinder length="0.038" radius="0.096"/> 
+      </geometry>
+    </collision>
+  </link>
+  
+  
+
+  <joint name="left_front_wheel_joint" type="fixed"> 
+    <axis xyz="0 0 1"/> 
+    <parent link="base_link"/> 
+    <child link="left_front_wheel"/> 
+    <origin rpy="1.5708 0 0" xyz="-0.36143 -0.281 -0.17159"/> 
+  </joint>
+  
+  
+ <link name="Lidar_front"> 
+    <visual>
+      <geometry> 
+        <box size="0.106 0.106 0.0435"/> 
+      </geometry> 
+      <material name="purple"/>
+    </visual> 
+    <collision>
+      <geometry>
+        <box size="0.106 0.106 0.0435"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  
+
+  <joint name="Lidar_front_joint" type="fixed"> 
+    <axis xyz="0 0 1"/> 
+    <parent link="base_link"/> 
+    <child link="Lidar_front"/> 
+    <origin rpy="0 0 0.785398" xyz="-0.488 -0.278 0.0315"/> 
+  </joint>
+  
+  
+  
+ <link name="Lidar_rear"> 
+    <visual>
+      <geometry> 
+        <box size="0.106 0.106 0.0435"/> 
+      </geometry> 
+      <material name="purple"/>
+    </visual> 
+    <collision>
+      <geometry>
+        <box size="0.106 0.106 0.0435"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  
+
+  <joint name="Lidar_rear_joint" type="fixed"> 
+    <axis xyz="0 0 1"/> 
+    <parent link="base_link"/> 
+    <child link="Lidar_rear"/> 
+    <origin rpy="0 0 -2.356194" xyz="0.488 0.278 0.0315"/> 
+  </joint>
+ 
+ 
+ 
+ 
+ <link name="D435i"> 
+    <visual> 
+      <geometry> 
+        <box size="0.025 0.09 0.025"/> 
+      </geometry> 
+      <material name="blue"/>
+    </visual> 
+    <collision>
+      <geometry>
+        <box size="0.025 0.025 0.09"/> 
+      </geometry>
+    </collision>
+  </link>
+  
+  
+
+  <joint name="D435i_joint" type="fixed"> 
+    <axis xyz="0 0 1"/> 
+    <parent link="base_link"/> 
+    <child link="D435i"/> 
+    <origin rpy="0 0 0" xyz="-0.4375 0 0.0305"/> 
+  </joint>
+ 
+
+</robot>
+
+

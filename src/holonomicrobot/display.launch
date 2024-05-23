@@ -1,0 +1,8 @@
+<launch>
+        <param name="robot_description" command="cat $(find holonomicrobot)/urdf/holonomicrobot.urdf" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <?ignore
+        <node name="state_publisher" pkg="state_publisher" type="state_publisher" />
+        ?>
+        
+</launch>

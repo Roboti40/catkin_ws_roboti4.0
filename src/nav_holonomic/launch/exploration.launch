@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="explore_lite" type="explore" respawn="false" name="explore" output="screen">
+    <rosparam file="$(find nav_holonomic)/param/exploration_params.yaml" command="load" />
+  </node>
+</launch>
