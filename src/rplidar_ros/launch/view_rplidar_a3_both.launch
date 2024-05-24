@@ -1,0 +1,13 @@
+<!--
+  Used for visualising rplidar in action.  
+  
+  It requires rplidar.launch.
+ -->
+<launch>
+  <!-- Include the LIDAR launch file -->
+  <include file="$(find rplidar_ros)/launch/rplidar_a3_two_lidars.launch" />
+
+  <!-- Launch RViz with a specific configuration -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find rplidar_ros)/rviz/rplidar_two_lidars.rviz" />
+</launch>
+
