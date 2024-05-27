@@ -1,0 +1,32 @@
+<launch>
+    <!-- Launch the two lidars -->
+    <include file="$(find rplidar_ros)/launch/rplidar_a3_two_lidars.launch" />
+
+    <!-- Launch the lidar merger script -->
+    <!-- <node name="lidar_merger" pkg="rplidar_ros" type="lidar_merger_chatgpt.py" output="screen" /> -->
+
+    
+    <!-- Load the robot URDF file -->
+    <param name="robot_description" command="cat $(find speed_commands)/urdf/test_robot.urdf.xacro" />
+    
+    <include file="$(find ira_laser_tools)/launch/laserscan_multi_merger.launch" />
+    
+    <include file="$(find hector_slam_launch )/launch/tutorial.launch" />
+
+    <!-- Start joint state publisher -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+    <!-- Start robot state publisher -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+
+
+    
+    <!-- <node name="speed_commands_terminal" pkg="speed_commands" type="gnome-terminal-wrapper.py" output="screen" /> -->
+    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find speed_commands)/rviz/default.rviz" /> -->
+    
+
+    
+</launch>
+

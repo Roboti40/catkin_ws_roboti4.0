@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<robot name="robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  	<link name="map">
+ 	</link>
+ 
+     <joint name="odom_joint" type="fixed">
+        <origin xyz="1.5 1.0 0" rpy="0 0 0"/>
+        <parent link="map"/>
+        <child link="odom"/>        
+    </joint>
+ 
+ 
+ 	<link name="odom">
+ 	</link>
+ 
+     <joint name="base_joint" type="fixed">
+        <origin xyz="1.5 1.0 0" rpy="0 0 0"/>
+        <parent link="odom"/>
+        <child link="base_link"/>        
+    </joint>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.9 0.48 0.35"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.9 0.48 0.35"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="10.0" />
+      <inertia ixx="0.83333" ixy="0.0" ixz="0.0"
+              iyy="1.9333" iyz="0.0"
+              izz="2.1667" />
+    </inertial>
+    
+  </link>
+  
+<link name="Lidar_front"> 
+	    <inertial>
+      <origin
+        xyz="-0.065971 -0.034453 0.00052875"
+        rpy="0 0 0" />
+      <mass
+        value="0.029663" />
+      <inertia
+        ixx="2.3758E-05"
+        ixy="0"
+        ixz="0"
+        iyy="2.3758E-05"
+        iyz="0"
+        izz="4.7471E-05" />
+    </inertial>
+	    <visual>
+	      <geometry> 
+		<box size="0.106 0.106 0.0435"/> 
+	      </geometry> 
+	    </visual> 
+	    <collision>
+	      <geometry>
+		<box size="0.106 0.106 0.0435"/>
+	      </geometry>
+	    </collision>
+	  </link>
+	  
+	  <joint name="Lidar_front_joint" type="fixed"> 
+	    <axis xyz="0 0 1"/> 
+	    <parent link="base_link"/> 
+	    <child link="Lidar_front"/> 
+	    <origin rpy="0 0 3.14" xyz="-0.488 -0.278 0.0315"/> 
+	  </joint>
+	  
+	  
+<link name="Lidar_rear"> 
+	    <inertial>
+      <origin
+        xyz="-0.065971 -0.034453 0.00052875"
+        rpy="0 0 0" />
+      <mass
+        value="0.029663" />
+      <inertia
+        ixx="2.3758E-05"
+        ixy="0"
+        ixz="0"
+        iyy="2.3758E-05"
+        iyz="0"
+        izz="4.7471E-05" />
+    </inertial>
+	    <visual>
+	      <geometry> 
+		<box size="0.106 0.106 0.0435"/> 
+	      </geometry> 
+	    </visual> 
+	    <collision>
+	      <geometry>
+		<box size="0.106 0.106 0.0435"/>
+	      </geometry>
+	    </collision>
+	  </link>
+	  
+	  
+	  <joint name="Lidar_rear_joint" type="fixed"> 
+	    <axis xyz="0 0 1"/> 
+	    <parent link="base_link"/> 
+	    <child link="Lidar_rear"/> 
+	    <origin rpy="0 0 0" xyz="0.488 0.278 0.0315"/> 
+	  </joint>	  
+	
+
+</robot>

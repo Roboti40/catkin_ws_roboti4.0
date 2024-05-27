@@ -11,7 +11,7 @@ import sensor_msgs.point_cloud2 as pc2
 class ExtendedScan:
 
     def __init__(self):
-        self.scan_pub = rospy.Publisher('/merged', LaserScan, queue_size=10)
+        self.scan_pub = rospy.Publisher('/scan', LaserScan, queue_size=10,)
         self.scan1 = None
         self.scan2 = None
         self.tf_buffer = tf2_ros.Buffer()
@@ -110,7 +110,7 @@ class ExtendedScan:
         return laserscan
 
 if __name__ == '__main__':
-    rospy.init_node('extended_scan_publisher')
+    rospy.init_node('lidar_merger')
     rospy.loginfo('Starting extended_scan_publisher node')
     ES = ExtendedScan()
     rospy.spin()
