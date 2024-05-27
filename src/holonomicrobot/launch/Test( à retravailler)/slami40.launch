@@ -1,0 +1,52 @@
+<launch>
+
+  <param name="robot_description" textfile="$(find holonomicrobot)/urdf/holonomicrobot.urdf"/>
+  <param name="use_sim_time" value="false"/>
+  <node name="odom" pkg="odometry" type="odometry.py" output="screen"/>
+    <include ns="lidar0" file="/home/isen/catkin_ws/src/rplidar_ros/launch/rplidar_arg.launch">
+        <arg name="serial_port" value="/dev/ttyUSB0"/>
+        <arg name="frame_id" type="string" value="Lidar_rear"/>
+    </include>
+    <include ns="lidar1" file="/home/isen/catkin_ws/src/rplidar_ros/launch/rplidar_arg.launch">
+        <arg name="serial_port" value="/dev/ttyUSB1"/>
+        <arg name="frame_id" type="string" value="Lidar_front"/>
+    </include>
+
+
+  <node name="serial_node_bis" pkg="rosserial_arduino" type="serial_node.py" output="screen" required="true">
+  <param name="port" value="/dev/ttyACM1"/>
+  </node>
+  	
+  <node name="serial_node" pkg="rosserial_arduino" type="serial_node.py" output="screen" required="true">
+  <param name="port" value="/dev/ttyACM0"/>
+  </node>
+
+
+
+
+
+  <arg name="scan_topic"  default="/lidar1/scan" />
+  <arg name="lidar0_topic"  default="/lidar0/scan" />
+  <arg name="lidar1_topic"  default="//lidar1/scan" />
+  <arg name="lidar_merger_topic"  default="/scan_topic" />
+
+
+
+
+
+<?ignore
+    <!-- Nœud pour publier les données du Lidar 1 -->
+  <node pkg="rplidar_ros" type="lidar_publisher.py" name="lidar1_publisher" output="screen">
+    <param name="lidar_topic" value="/lidar0"/>
+  </node>
+
+  <!-- Nœud pour publier les données du Lidar 2 -->
+  <node pkg="rplidar_ros" type="lidar_publisher.py" name="lidar2_publisher" output="screen">
+    <param name="lidar_topic" value="/lidar1"/>
+  </node>
+  
+  ?>
+
+<remap from="/lidar1/scan" to="/scan"/> <!-- Remapper le topic scan -->
+
+</launch>

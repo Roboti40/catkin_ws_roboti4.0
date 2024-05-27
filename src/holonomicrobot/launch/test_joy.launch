@@ -1,0 +1,8 @@
+<launch>
+
+  <node name="joy_launch_node" pkg="joy" type="joy_node" output="screen"/>
+  
+  <node name="joy_to_cmd_vel_node" pkg="joystick" type="joystick.py" output="screen"/>
+
+
+</launch>

@@ -1,0 +1,36 @@
+<launch>
+  <!-- Static Transform for the first LIDAR -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher_lidar0" args="0.488 0.278  0.0315 0 0 0 base_link laser0" />
+
+  <!-- Launch the first RPLIDAR -->
+  <node name="rplidarNode0" pkg="rplidar_ros" type="rplidarNode" output="screen">
+    <param name="serial_port" type="string" value="/dev/ttyUSB0"/>
+    <param name="serial_baudrate" type="int" value="256000"/> <!-- A3 -->
+    <param name="frame_id" type="string" value="Lidar_front"/>
+    
+    <!-- param name="frame_id" type="string" value="laser0"/> -->
+    
+    <param name="inverted" type="bool" value="false"/>
+    <param name="angle_compensate" type="bool" value="true"/>
+    <param name="scan_mode" type="string" value="Sensitivity"/>
+    <remap from="scan" to="scan1"/>
+  </node>
+
+  <!-- Static Transform for the second LIDAR -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher_lidar1" args="-0.488 -0.278 0.0315 0 0 3.14 base_link laser1" />
+
+  <!-- Launch the second RPLIDAR -->
+  <node name="rplidarNode1" pkg="rplidar_ros" type="rplidarNode" output="screen">
+    <param name="serial_port" type="string" value="/dev/ttyUSB1"/>
+    <param name="serial_baudrate" type="int" value="256000"/> <!-- A3 -->
+    <param name="frame_id" type="string" value="Lidar_rear"/>
+    
+    <!-- <param name="frame_id" type="string" value="laser1"/> -->
+    
+    <param name="inverted" type="bool" value="false"/>
+    <param name="angle_compensate" type="bool" value="true"/>
+    <param name="scan_mode" type="string" value="Sensitivity"/>
+    <remap from="scan" to="scan2"/>
+  </node>
+</launch>
+
